@@ -2,6 +2,12 @@
 
 [![MIT license][license-badge]][license-url]
 [![Maintenance status][status-badge]][status-url]
+[![Code coverage][coverage-badge]][coverage-url]
+
+[![Chrome Web Store version][store-version-badge]][store-version-url]
+[![Chrome Web Store rating][store-rating-badge]][store-rating-url]
+[![Chrome Web Store rating][store-stars-badge]][store-stars-url]
+[![Chrome Web Store users count][store-users-badge]][store-users-url]
 
 ## About
 
@@ -39,14 +45,19 @@ You can [setup your own shortcut for activation](chrome://extensions/shortcuts),
 
 | Name | Description |
 | :--- | :--- |
-| Host | Basic part of URL |
-| Team | Your team space |
+| Host | Host of task tracker |
+| Team | Team name value |
+| Tracker | Predefined task trackers |
 
-As a result `<Host>/<Team>-<issue number>` will be opended. Please do not forget to add `http` or `https` in the beginning.
+Please do not forget to add `http` or `https` to the `Host`.
 
 ## Tests
 
-So faw there are no tests
+`mocha` and `assert` are used for testing and `c8` for coverage
+
+`npm test` - run tests
+
+`npm run cover` - run code coverage
 
 [warp-url]: https://github.com/vikian050194/warp
 
@@ -55,3 +66,18 @@ So faw there are no tests
 
 [license-url]: https://github.com/vikian050194/track/blob/master/LICENSE
 [license-badge]: https://img.shields.io/github/license/vikian050194/track.svg
+
+[coverage-url]: https://codecov.io/gh/vikian050194/track
+[coverage-badge]: https://img.shields.io/codecov/c/github/vikian050194/track
+
+[store-version-url]: https://chrome.google.com/webstore/detail/track/mpkodpbohnmbjfbeihcbnddbbagklpni
+[store-version-badge]: https://img.shields.io/chrome-web-store/v/mpkodpbohnmbjfbeihcbnddbbagklpni
+
+[store-rating-url]: https://chrome.google.com/webstore/detail/track/mpkodpbohnmbjfbeihcbnddbbagklpni
+[store-rating-badge]: https://img.shields.io/chrome-web-store/rating/mpkodpbohnmbjfbeihcbnddbbagklpni
+
+[store-stars-url]: https://chrome.google.com/webstore/detail/track/mpkodpbohnmbjfbeihcbnddbbagklpni
+[store-stars-badge]: https://img.shields.io/chrome-web-store/stars/mpkodpbohnmbjfbeihcbnddbbagklpni
+
+[store-users-url]: https://chrome.google.com/webstore/detail/track/mpkodpbohnmbjfbeihcbnddbbagklpni
+[store-users-badge]: https://img.shields.io/chrome-web-store/users/mpkodpbohnmbjfbeihcbnddbbagklpni

@@ -1,8 +1,8 @@
 import {
     Sync,
-    HOST,
-    TEAM
+    Keys
 } from "../common/index.js";
+import { buildUrl } from "../common/url.js";
 
 const makeDiv = (id, text = null, className = null) => {
     const newElement = document.createElement("div");
@@ -18,10 +18,13 @@ const makeDiv = (id, text = null, className = null) => {
 };
 
 document.addEventListener("DOMContentLoaded", async () => {
-    const host = await Sync.get(HOST);
-    const team = await Sync.get(TEAM);
+    const tracker = await Sync.get(Keys.TRACKER);
+    const host = await Sync.get(Keys.HOST);
+    const team = await Sync.get(Keys.TEAM);
 
-    let query = "";
+    const build = (issue) => buildUrl(tracker, host, team, issue);
+
+    let issue = "";
 
     const $root = document.getElementById("root");
 
@@ -34,7 +37,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.addEventListener("keydown", async ({ key, shiftKey }) => {
         switch (key) {
             case "Enter": {
-                const url = `${host}/${team}-${query}`;
+                const url = build(issue);
                 if (shiftKey) {
                     await chrome.tabs.create({ url });
                 } else {
@@ -47,10 +50,10 @@ document.addEventListener("DOMContentLoaded", async () => {
             }
             default:
                 if (key.length == 1) {
-                    query += key;
+                    issue += key;
                 } else {
                     if (key == "Backspace") {
-                        query = query.slice(0, query.length - 1);
+                        issue = issue.slice(0, issue.length - 1);
                     } else {
                         break;
                     }
@@ -58,6 +61,6 @@ document.addEventListener("DOMContentLoaded", async () => {
                 break;
         }
 
-        $query.innerText = query || "...";
+        $query.innerText = issue || "...";
     });
 });
