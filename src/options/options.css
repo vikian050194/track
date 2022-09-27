@@ -1,0 +1,7 @@
+@import "../common.css";
+
+.new {
+    color: orange;
+    font-weight: bold;
+    margin-right: 4px;
+}

@@ -2,7 +2,7 @@
     "manifest_version": 3,
     "name": "track",
     "description": "Open task without clicking",
-    "version": "0.2.0",
+    "version": "0.3.0",
     "permissions": [
         "storage"
     ],
@@ -29,5 +29,6 @@
         "16": "icons/icon_16.png",
         "32": "icons/icon_32.png",
         "128": "icons/icon_128.png"
-    }
+    },
+    "homepage_url": "https://github.com/vikian050194/track"
 }

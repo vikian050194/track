@@ -4,38 +4,56 @@
 <head>
     <link rel="stylesheet" href="options.css">
     <script src="options.js" type="module"></script>
+    <title>track: options</title>
 </head>
 
 <body>
-    <table>
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Value</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Host</td>
-                <td><input id="host"></td>
-            </tr>
-            <tr>
-                <td>Team</td>
-                <td><input id="team"></td>
-            </tr>
-            <tr>
-                <td>Tracker</td>
-                <td>
-                    <select id="tracker">
-                        <option value="youtrack">YouTrack</option>
-                        <option value="jira">Jira</option>
-                        <option value="custom">custom</option>
-                    </select>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <button id="save">Save</button>
+    <div class="container">
+        <header>
+            <h1>Options</h1>
+        </header>
+        <main>
+            <h2>URL</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Value</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Host</td>
+                        <td><input id="host"></td>
+                        <td><span>Task tracker host is basic part of result URL</span></td>
+                    </tr>
+                    <tr>
+                        <td>Team</td>
+                        <td><input id="team"></td>
+                        <td><span>Team specific URL part</span></td>
+                    </tr>
+                    <tr>
+                        <td>Tracker</td>
+                        <td>
+                            <select id="tracker">
+                                <option value="youtrack">YouTrack</option>
+                                <option value="jira">Jira</option>
+                                <option value="custom">custom</option>
+                            </select>
+                        </td>
+                        <td><span>Predefined task trackers; Each tracker has its own way to build task URL</span></td>
+                    </tr>
+                </tbody>
+            </table>
+            <button id="save" class="action">Save</button>
+        </main>
+        <footer>
+            <span>
+                <a href="/options/options.html">options</a>
+            </span>
+        </footer>
+    </div>
 </body>
 
 </html>
