@@ -23,6 +23,10 @@ Developed and tested on `Version 100.0.4896.75 (Official Build) (64-bit)` and ne
 
 ## Installation
 
+**Chrome Web Store**
+
+Just go [here][store-version-url] and click "Add to Chrome"
+
 **From sources**
 
 1. Clone repo
