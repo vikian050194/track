@@ -49,9 +49,10 @@ You can [setup your own shortcut for activation](chrome://extensions/shortcuts),
 
 | Name | Description |
 | :--- | :--- |
-| Host | Host of task tracker |
-| Team | Team name value |
-| Tracker | Predefined task trackers |
+| Custom URL | Custom URL to concatenate as-is with task ID |
+| Host | Basic part of result URL for non custom tracker |
+| Team | Team-specific URL part for non custom tracker |
+| Tracker | Predefined task trackers; Each tracker has its way to build task URL |
 
 Please do not forget to add `http` or `https` to the `Host`.
 

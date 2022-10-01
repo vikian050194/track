@@ -18,11 +18,12 @@ const makeDiv = (id, text = null, className = null) => {
 };
 
 document.addEventListener("DOMContentLoaded", async () => {
+    const custom = await Sync.get(Keys.CUSTOM_URL);
     const tracker = await Sync.get(Keys.TRACKER);
     const host = await Sync.get(Keys.HOST);
     const team = await Sync.get(Keys.TEAM);
 
-    const build = (issue) => buildUrl(tracker, host, team, issue);
+    const build = (issue) => buildUrl(custom, tracker, host, team, issue);
 
     let issue = "";
 
@@ -44,7 +45,6 @@ document.addEventListener("DOMContentLoaded", async () => {
                     const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
                     await chrome.tabs.update(tab.id, { url });
                 }
-                // TODO add setting for this feature
                 window.close();
                 break;
             }

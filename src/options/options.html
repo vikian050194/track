@@ -24,14 +24,19 @@
                 </thead>
                 <tbody>
                     <tr>
+                        <td>Custom URL</td>
+                        <td><input id="custom-url"></td>
+                        <td><span class="new">NEW!</span><span>Custom URL to concatenate as-is with task ID</span></td>
+                    </tr>
+                    <tr>
                         <td>Host</td>
                         <td><input id="host"></td>
-                        <td><span>Task tracker host is basic part of result URL</span></td>
+                        <td><span>Basic part of result URL for non custom tracker</span></td>
                     </tr>
                     <tr>
                         <td>Team</td>
                         <td><input id="team"></td>
-                        <td><span>Team specific URL part</span></td>
+                        <td><span>Team-specific URL part for non custom tracker</span></td>
                     </tr>
                     <tr>
                         <td>Tracker</td>
@@ -42,7 +47,7 @@
                                 <option value="custom">custom</option>
                             </select>
                         </td>
-                        <td><span>Predefined task trackers; Each tracker has its own way to build task URL</span></td>
+                        <td><span>Predefined task trackers; Each tracker has its way to build task URL</span></td>
                     </tr>
                 </tbody>
             </table>

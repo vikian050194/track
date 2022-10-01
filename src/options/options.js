@@ -4,6 +4,9 @@ import {
 } from "../common/index.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
+    const $custom = document.getElementById(Keys.CUSTOM_URL);
+    $custom.value = await Sync.get(Keys.CUSTOM_URL);
+
     const $host = document.getElementById(Keys.HOST);
     $host.value = await Sync.get(Keys.HOST);
 
@@ -15,6 +18,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const $saveButton = document.getElementById("save");
     $saveButton.addEventListener("click", async () => {
+        await Sync.set(Keys.CUSTOM_URL, $custom.value);
         await Sync.set(Keys.HOST, $host.value);
         await Sync.set(Keys.TEAM, $team.value);
         await Sync.set(Keys.TRACKER, $tracker.value);
