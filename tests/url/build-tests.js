@@ -1,4 +1,4 @@
-import assert from "assert";
+import assert from "node:assert";
 
 import { buildUrl } from "../../src/common/url.js";
 import { Keys } from "../../src/common/index.js";

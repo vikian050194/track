@@ -1,4 +1,4 @@
-import assert from "assert";
+import assert from "node:assert";
 
 import { buildCustomIssueUrl } from "../../src/common/url.js";
 
