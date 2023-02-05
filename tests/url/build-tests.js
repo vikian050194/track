@@ -1,7 +1,7 @@
 import assert from "node:assert";
 
 import { buildUrl } from "../../src/common/url.js";
-import { Keys } from "../../src/common/index.js";
+import { TRACKERS } from "../../src/common/index.js";
 
 describe("Build URL", function () {
     it("custom", () => {
@@ -12,7 +12,7 @@ describe("Build URL", function () {
 
         const expected = "customissue";
 
-        const actual = buildUrl(custom, Keys.CUSTOM, host, team, issue);
+        const actual = buildUrl(custom, TRACKERS.CUSTOM, host, team, issue);
 
         assert.equal(actual, expected);
     });
@@ -25,7 +25,7 @@ describe("Build URL", function () {
 
         const expected = "host/issue/team-issue";
 
-        const actual = buildUrl(custom, Keys.YOUTRACK, host, team, issue);
+        const actual = buildUrl(custom, TRACKERS.YOUTRACK, host, team, issue);
 
         assert.equal(actual, expected);
     });
@@ -38,7 +38,7 @@ describe("Build URL", function () {
 
         const expected = "host/browse/team-issue";
 
-        const actual = buildUrl(custom, Keys.JIRA, host, team, issue);
+        const actual = buildUrl(custom, TRACKERS.JIRA, host, team, issue);
 
         assert.equal(actual, expected);
     });

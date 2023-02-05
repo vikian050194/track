@@ -1,26 +1,26 @@
 import {
     Sync,
-    Keys
+    OPTIONS
 } from "../common/index.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
-    const $custom = document.getElementById(Keys.CUSTOM_URL);
-    $custom.value = await Sync.get(Keys.CUSTOM_URL);
+    const $custom = document.getElementById(OPTIONS.CUSTOM_URL);
+    $custom.value = await Sync.get(OPTIONS.CUSTOM_URL);
 
-    const $host = document.getElementById(Keys.HOST);
-    $host.value = await Sync.get(Keys.HOST);
+    const $host = document.getElementById(OPTIONS.HOST);
+    $host.value = await Sync.get(OPTIONS.HOST);
 
-    const $team = document.getElementById(Keys.TEAM);
-    $team.value = await Sync.get(Keys.TEAM);
+    const $team = document.getElementById(OPTIONS.TEAM);
+    $team.value = await Sync.get(OPTIONS.TEAM);
 
-    const $tracker = document.getElementById(Keys.TRACKER);
-    $tracker.value = await Sync.get(Keys.TRACKER);
+    const $tracker = document.getElementById(OPTIONS.TRACKER);
+    $tracker.value = await Sync.get(OPTIONS.TRACKER);
 
     const $saveButton = document.getElementById("save");
     $saveButton.addEventListener("click", async () => {
-        await Sync.set(Keys.CUSTOM_URL, $custom.value);
-        await Sync.set(Keys.HOST, $host.value);
-        await Sync.set(Keys.TEAM, $team.value);
-        await Sync.set(Keys.TRACKER, $tracker.value);
+        await Sync.set(OPTIONS.CUSTOM_URL, $custom.value);
+        await Sync.set(OPTIONS.HOST, $host.value);
+        await Sync.set(OPTIONS.TEAM, $team.value);
+        await Sync.set(OPTIONS.TRACKER, $tracker.value);
     });
 });

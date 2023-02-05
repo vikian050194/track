@@ -1,4 +1,4 @@
-import { Keys } from "./index.js";
+import { TRACKERS } from "./constants/index.js";
 
 export const buildYouTrackIssueUrl = (host, team, issue) => {
     return `${host}/issue/${team}-${issue}`;
@@ -14,11 +14,11 @@ export const buildCustomIssueUrl = (host, team, issue) => {
 
 export const buildUrl = (custom, tracker, host, team, issue) => {
     switch (tracker) {
-        case Keys.CUSTOM:
+        case TRACKERS.CUSTOM:
             return buildCustomIssueUrl(custom, "", issue);
-        case Keys.YOUTRACK:
+        case TRACKERS.YOUTRACK:
             return buildYouTrackIssueUrl(host, team, issue);
-        case Keys.JIRA:
+        case TRACKERS.JIRA:
             return buildJiraIssueUrl(host, team, issue);
         default:
             throw new Error(`Unknown tracker ${tracker}`);

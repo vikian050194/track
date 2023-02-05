@@ -2,10 +2,14 @@
     "manifest_version": 3,
     "name": "track",
     "description": "Open task without clicking",
-    "version": "0.4.0",
+    "version": "0.5.0",
     "permissions": [
         "storage"
     ],
+    "background": {
+        "service_worker": "background/index.js",
+        "type": "module"
+    },
     "action": {
         "default_icon": "icons/icon_32.png",
         "default_popup": "popup/popup.html"

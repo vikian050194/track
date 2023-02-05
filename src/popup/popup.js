@@ -1,6 +1,6 @@
 import {
     Sync,
-    Keys
+    OPTIONS
 } from "../common/index.js";
 import { buildUrl } from "../common/url.js";
 
@@ -18,10 +18,10 @@ const makeDiv = (id, text = null, className = null) => {
 };
 
 document.addEventListener("DOMContentLoaded", async () => {
-    const custom = await Sync.get(Keys.CUSTOM_URL);
-    const tracker = await Sync.get(Keys.TRACKER);
-    const host = await Sync.get(Keys.HOST);
-    const team = await Sync.get(Keys.TEAM);
+    const custom = await Sync.get(OPTIONS.CUSTOM_URL);
+    const tracker = await Sync.get(OPTIONS.TRACKER);
+    const host = await Sync.get(OPTIONS.HOST);
+    const team = await Sync.get(OPTIONS.TEAM);
 
     const build = (issue) => buildUrl(custom, tracker, host, team, issue);
 
