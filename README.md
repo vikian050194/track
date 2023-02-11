@@ -52,17 +52,18 @@ You can [setup your own shortcut for activation](chrome://extensions/shortcuts),
 | Custom URL | Custom URL to concatenate as-is with task ID |
 | Host | Basic part of result URL for non custom tracker |
 | Team | Team-specific URL part for non custom tracker |
-| Tracker | Predefined task trackers; Each tracker has its way to build task URL |
+| Tracker | Predefined task trackers; Each tracker has specific way to build task URL |
 
 Please do not forget to add `http` or `https` to the `Host`.
 
 ## Tests
 
-`mocha` and `assert` are used for testing and `c8` for coverage
+`mocha` is used for unit testing and `c8` for coverage
+`playwright` is used for e2e testing
 
-`npm test` - run tests
-
+`npm test` - run unit tests
 `npm run cover` - run code coverage
+`npm run test:ui` - run e2e tests
 
 [warp-url]: https://github.com/vikian050194/warp
 
