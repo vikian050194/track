@@ -35,6 +35,12 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     $query.innerText = "...";
 
+    document.addEventListener("paste", e => {
+        const data = e.clipboardData.getData("text/plain");
+        issue = data;
+        $query.innerText = issue || "...";
+    });
+
     document.addEventListener("keydown", async ({ key, shiftKey }) => {
         switch (key) {
             case "Enter": {
