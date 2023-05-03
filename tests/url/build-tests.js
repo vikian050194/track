@@ -1,56 +1,38 @@
 import assert from "node:assert";
 
 import { buildUrl } from "../../src/common/url.js";
-import { TRACKERS } from "../../src/common/index.js";
 
 describe("Build URL", function () {
-    it("custom", () => {
-        const custom = "custom";
-        const host = "host";
-        const team = "team";
-        const issue = "issue";
+    it("Template without placeholder", () => {
+        const template = "string_without_placeholder";
+        const value = "issue";
 
-        const expected = "customissue";
+        const expected = "string_without_placeholder";
 
-        const actual = buildUrl(custom, TRACKERS.CUSTOM, host, team, issue);
+        const actual = buildUrl(template, value);
 
         assert.equal(actual, expected);
     });
 
-    it("YouTrack", () => {
-        const custom = "custom";
-        const host = "host";
-        const team = "team";
-        const issue = "issue";
+    it("Template with one placeholder", () => {
+        const template = "example.com?issue={{value}}";
+        const value = "2023";
 
-        const expected = "host/issue/team-issue";
+        const expected = "example.com?issue=2023";
 
-        const actual = buildUrl(custom, TRACKERS.YOUTRACK, host, team, issue);
+        const actual = buildUrl(template, value);
 
         assert.equal(actual, expected);
     });
 
-    it("Jira", () => {
-        const custom = "custom";
-        const host = "host";
-        const team = "team";
-        const issue = "issue";
+    it("Template with two placeholders", () => {
+        const template = "example.com?t1={{value}}&t2={{value}}";
+        const value = "2023";
 
-        const expected = "host/browse/team-issue";
+        const expected = "example.com?t1=2023&t2=2023";
 
-        const actual = buildUrl(custom, TRACKERS.JIRA, host, team, issue);
+        const actual = buildUrl(template, value);
 
         assert.equal(actual, expected);
-    });
-
-    it("error", () => {
-        const custom = "custom";
-        const host = "host";
-        const team = "team";
-        const issue = "issue";
-
-        assert.throws(() => {
-            buildUrl(custom, "test", host, team, issue);
-        }, Error, "Unknown tracker test",);
     });
 });

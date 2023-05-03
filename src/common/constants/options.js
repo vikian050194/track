@@ -1,4 +1,2 @@
-export const CUSTOM_URL = "custom-url";
-export const HOST = "host";
-export const TEAM = "team";
-export const TRACKER = "tracker";
+export const IS_AUTOCLOSE_ENABLED = "is-autoclose-enabled";
+export const AUTOCLOSE_TIME = "autoclose-time";

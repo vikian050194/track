@@ -9,6 +9,8 @@ export class PopupPage extends BasePage {
         super(page, extensionId);
 
         this.query = page.locator("#query");
+        this.selected = page.locator("#options > div.selected");
+        this.nth = (n) => page.locator(`#opt-${n}`);
     }
 
     async goto() {
@@ -29,6 +31,14 @@ export class PopupPage extends BasePage {
 
     async shiftEnter() {
         await this.press("Shift+Enter");
+    }
+
+    async up() {
+        await this.press("ArrowUp");
+    }
+
+    async down() {
+        await this.press("ArrowDown");
     }
 
     async backspace() {

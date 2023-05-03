@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.7.0] - 2023-05-03
+
+### Added
+
+- Add multiple targets
+- Delete target
+- Disable unnecessary targets
+- Select required target
+
+### Removed
+
+- Pre-defined task trackers
+
 ## [0.6.0] - 2023-03-15
 
 ### Added
@@ -50,7 +63,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Open new tab
 - Update current tab
 
-[Unreleased]: https://github.com/vikian050194/track/compare/v0.6.0...HEAD
+[Unreleased]: https://github.com/vikian050194/track/compare/v0.7.0...HEAD
+[0.7.0]: https://github.com/vikian050194/track/compare/v0.6.0...v0.7.0
 [0.6.0]: https://github.com/vikian050194/track/compare/v0.5.0...v0.6.0
 [0.5.0]: https://github.com/vikian050194/track/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/vikian050194/track/compare/v0.3.0...v0.4.0

@@ -1,7 +1,7 @@
 import { OPTIONS } from "../../src/common/constants/index.js";
 import { BasePage, BasePOM } from "./base.js";
 
-class InputOption extends BasePOM {
+class CheckboxOption extends BasePOM {
     /**
      * @param {import('@playwright/test').Page} page
      */
@@ -11,12 +11,12 @@ class InputOption extends BasePOM {
         this.locator = page.locator(`#${id}`);
     }
 
-    async setValue(value) {
-        await this.locator.fill(value);
+    async click() {
+        await this.locator.click();
     }
 
-    async hasValue(value) {
-        await this.expect(this.locator).toHaveValue(value);
+    async isChecked(checked = true) {
+        await this.expect(this.locator).toBeChecked({ checked });
     }
 }
 
@@ -43,17 +43,15 @@ class SelectOption extends BasePOM {
     }
 }
 
-export class UrlOptions extends BasePOM {
+class AutocloseOptions extends BasePOM {
     /**
      * @param {import('@playwright/test').Page} page
      */
     constructor(page) {
         super(page);
 
-        this.customUrl = new InputOption(page, OPTIONS.CUSTOM_URL, page);
-        this.host = new InputOption(page, OPTIONS.HOST, page);
-        this.team = new InputOption(page, OPTIONS.TEAM, page);
-        this.tracker = new SelectOption(page, OPTIONS.TRACKER);
+        this.enabled = new CheckboxOption(page, OPTIONS.IS_AUTOCLOSE_ENABLED);
+        this.time = new SelectOption(page, OPTIONS.AUTOCLOSE_TIME);
     }
 }
 
@@ -64,7 +62,7 @@ export class OptionsPage extends BasePage {
     constructor(page, extensionId) {
         super(page, extensionId);
 
-        this.url = new UrlOptions(page);
+        this.autoclose = new AutocloseOptions(page);
 
         this.saveButton = page.locator("#save");
     }

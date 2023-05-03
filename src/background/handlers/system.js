@@ -1,31 +1,42 @@
 import {
     Sync,
+    Local,
+    MENU,
     OPTIONS,
-    TRACKERS
+    TARGETS
 } from "../../common/index.js";
 
 const updateDefaultValues = async () => {
-    const customUrl = await Sync.get(OPTIONS.CUSTOM_URL);
-    if (customUrl === undefined) {
-        await Sync.set(OPTIONS.CUSTOM_URL, "https://example.com/test-");
+    // autoclose
+    const isAutocloseEnabled = await Sync.get(OPTIONS.IS_AUTOCLOSE_ENABLED);
+    if (isAutocloseEnabled === undefined) {
+        await Sync.set(OPTIONS.IS_AUTOCLOSE_ENABLED, true);
     }
 
-    const host = await Sync.get(OPTIONS.HOST);
-    if (host === undefined) {
-        await Sync.set(OPTIONS.HOST, "https://example.com");
+    const autocloseTime = await Sync.get(OPTIONS.AUTOCLOSE_TIME);
+    if (autocloseTime === undefined) {
+        await Sync.set(OPTIONS.AUTOCLOSE_TIME, 1);
     }
 
-    const team = await Sync.get(OPTIONS.TEAM);
-    if (team === undefined) {
-        await Sync.set(OPTIONS.TEAM, "MYTEAM");
-    }
-
-    const tracker = await Sync.get(OPTIONS.TRACKER);
-    if (tracker === undefined) {
-        await Sync.set(OPTIONS.TRACKER, TRACKERS.CUSTOM);
+    // local data
+    const targets = await Local.get(TARGETS.TARGETS);
+    if (targets === undefined) {
+        await Local.set(TARGETS.TARGETS, []);
     }
 };
 
+const updateMenu = () => {
+    chrome.contextMenus.create({
+        id: MENU.TARGETS,
+        title: "Targets",
+        contexts: ["action"],
+        type: "normal",
+        enabled: true
+    });
+};
+
 export const onInstall = async () => {
+    updateMenu();
+
     await updateDefaultValues();
 };

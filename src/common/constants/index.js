@@ -1,2 +1,3 @@
 export * as OPTIONS from "./options.js";
-export * as TRACKERS from "./trackers.js";
+export * as TARGETS from "./targets.js";
+export * as MENU from "./menu.js";

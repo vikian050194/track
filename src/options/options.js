@@ -4,23 +4,18 @@ import {
 } from "../common/index.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
-    const $custom = document.getElementById(OPTIONS.CUSTOM_URL);
-    $custom.value = await Sync.get(OPTIONS.CUSTOM_URL);
+    // Autoclose
+    const $isAutocloseEnabled = document.getElementById(OPTIONS.IS_AUTOCLOSE_ENABLED);
+    $isAutocloseEnabled.checked = await Sync.get(OPTIONS.IS_AUTOCLOSE_ENABLED);
 
-    const $host = document.getElementById(OPTIONS.HOST);
-    $host.value = await Sync.get(OPTIONS.HOST);
+    const $autocloseTimeSec = document.getElementById(OPTIONS.AUTOCLOSE_TIME);
+    $autocloseTimeSec.value = await Sync.get(OPTIONS.AUTOCLOSE_TIME);
 
-    const $team = document.getElementById(OPTIONS.TEAM);
-    $team.value = await Sync.get(OPTIONS.TEAM);
-
-    const $tracker = document.getElementById(OPTIONS.TRACKER);
-    $tracker.value = await Sync.get(OPTIONS.TRACKER);
-
+    // Save
     const $saveButton = document.getElementById("save");
     $saveButton.addEventListener("click", async () => {
-        await Sync.set(OPTIONS.CUSTOM_URL, $custom.value);
-        await Sync.set(OPTIONS.HOST, $host.value);
-        await Sync.set(OPTIONS.TEAM, $team.value);
-        await Sync.set(OPTIONS.TRACKER, $tracker.value);
+        // Autoclose
+        await Sync.set(OPTIONS.IS_AUTOCLOSE_ENABLED, $isAutocloseEnabled.checked);
+        await Sync.set(OPTIONS.AUTOCLOSE_TIME, $autocloseTimeSec.value);
     });
 });

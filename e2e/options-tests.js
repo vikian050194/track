@@ -1,4 +1,3 @@
-import { TRACKERS } from "../src/common/index.js";
 import { test, expect } from "./fixtures.js";
 import { OptionsPage } from "./pom/index.js";
 
@@ -23,6 +22,17 @@ test.describe("Options", () => {
             // Assert
             await expect(page).toHaveURL(new RegExp("options/options.html"));
         });
+
+        test("Targets", async ({ page }) => {
+            // Arrange
+            const link = page.locator("footer > span", { hasText: "targets" });
+
+            // Act
+            await link.click();
+
+            // Assert
+            await expect(page).toHaveURL(new RegExp("targets/targets.html"));
+        });
     });
 
     test("Header", async ({ page }) => {
@@ -38,31 +48,25 @@ test.describe("Options", () => {
         const sections = page.locator("h2");
 
         // Assert
-        await expect(sections.nth(0)).toHaveText("URL");
+        await expect(sections.nth(0)).toHaveText("Popup autoclose");
     });
 
-    test("Section: URL", async ({ page }) => {
+    test("Section: Popup autoclose", async ({ page }) => {
         // Arrange
         const pom = new OptionsPage(page);
 
-        await pom.url.customUrl.hasValue("https://example.com/test-");
-        await pom.url.host.hasValue("https://example.com");
-        await pom.url.team.hasValue("MYTEAM");
-        await pom.url.tracker.hasValue(TRACKERS.CUSTOM);
+        await pom.autoclose.enabled.isChecked(true);
+        await pom.autoclose.time.hasValue("1");
 
-        // // Act
-        await pom.url.customUrl.setValue("foobar3000.com/t-");
-        await pom.url.host.setValue("foobar3000.com");
-        await pom.url.team.setValue("kek");
-        await pom.url.tracker.setValue(TRACKERS.JIRA);
+        // Act
+        await pom.autoclose.enabled.click();
+        await pom.autoclose.time.setValue("2");
 
         await pom.save();
         await pom.reload();
 
         // Assert
-        await pom.url.customUrl.hasValue("foobar3000.com/t-");
-        await pom.url.host.hasValue("foobar3000.com");
-        await pom.url.team.hasValue("kek");
-        await pom.url.tracker.hasValue(TRACKERS.JIRA);
+        await pom.autoclose.enabled.isChecked(false);
+        await pom.autoclose.time.hasValue("2");
     });
 });

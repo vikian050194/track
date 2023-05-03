@@ -1,65 +1,99 @@
 import {
+    dom,
     Sync,
-    OPTIONS
+    Local,
+    OPTIONS,
+    TARGETS
 } from "../common/index.js";
 import { buildUrl } from "../common/url.js";
 
-const makeDiv = (id, text = null, className = null) => {
-    const newElement = document.createElement("div");
-    newElement.id = id;
-    if (className) {
-        newElement.className = className;
-    }
-    if (text) {
-        const textContent = document.createTextNode(text);
-        newElement.appendChild(textContent);
-    }
-    return newElement;
-};
-
 document.addEventListener("DOMContentLoaded", async () => {
-    const custom = await Sync.get(OPTIONS.CUSTOM_URL);
-    const tracker = await Sync.get(OPTIONS.TRACKER);
-    const host = await Sync.get(OPTIONS.HOST);
-    const team = await Sync.get(OPTIONS.TEAM);
+    const isAutocloseEnabled = await Sync.get(OPTIONS.IS_AUTOCLOSE_ENABLED);
+    const autocloseTimeSec = await Sync.get(OPTIONS.AUTOCLOSE_TIME);
+    let autocloseId = null;
+    const resetAutoclose = () => clearTimeout(autocloseId);
 
-    const build = (issue) => buildUrl(custom, tracker, host, team, issue);
+    const allTargets = await Local.get(TARGETS.TARGETS);
+    const activeTargets = allTargets.filter(t => t.isActive);
 
-    let issue = "";
+    const makeDiv = dom.makeElementCreator("div");
+
+    const makeId = (id) => `opt-${id}`;
+
+    let currentOptionIndex = 0;
+    let maxOptionIndex = activeTargets.length - 1;
+
+    let query = "";
 
     const $root = document.getElementById("root");
 
-    const $query = makeDiv("query");
+    const $query = makeDiv({ id: "query" });
+    const $options = makeDiv({ id: "options" });
 
-    $root.append($query);
+    $root.append($query, document.createElement("hr"), $options);
+
+    const render = () => {
+        const elements = [];
+
+        for (let index = 0; index <= maxOptionIndex; index++) {
+            const option = activeTargets[index];
+            const isSelected = index == currentOptionIndex;
+            const title = `#${option.id}:${option.name}`;
+            const className = isSelected ? "selected" : null;
+            elements.push(makeDiv({ id: makeId(index), innerHTML: title, className }));
+        }
+
+        while ($options.firstChild) {
+            $options.removeChild($options.firstChild);
+        }
+
+        $options.append(...elements);
+    };
 
     $query.innerText = "...";
 
+    render();
+
     document.addEventListener("paste", e => {
         const data = e.clipboardData.getData("text/plain");
-        issue = data;
-        $query.innerText = issue || "...";
+        query = data;
+        $query.innerText = query || "...";
     });
 
     document.addEventListener("keydown", async ({ key, shiftKey }) => {
         switch (key) {
             case "Enter": {
-                const url = build(issue);
+                const url = buildUrl(allTargets[currentOptionIndex].template, query);
                 if (shiftKey) {
                     await chrome.tabs.create({ url });
                 } else {
                     const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
                     await chrome.tabs.update(tab.id, { url });
                 }
-                window.close();
+                if (isAutocloseEnabled) {
+                    autocloseId = setTimeout(window.close, autocloseTimeSec * 1000);
+                }
                 break;
             }
+            case "ArrowUp":
+                resetAutoclose();
+                currentOptionIndex = currentOptionIndex > 0 ? currentOptionIndex - 1 : maxOptionIndex;
+                // currentOptionIndex -= currentOptionIndex > 0 ? 1 : 0;
+                render();
+                break;
+            case "ArrowDown":
+                resetAutoclose();
+                currentOptionIndex = currentOptionIndex < maxOptionIndex ? currentOptionIndex + 1 : 0;
+                // currentOptionIndex += currentOptionIndex < maxOptionIndex ? 1 : 0;
+                render();
+                break;
             default:
+                resetAutoclose();
                 if (key.length == 1) {
-                    issue += key;
+                    query += key;
                 } else {
                     if (key == "Backspace") {
-                        issue = issue.slice(0, issue.length - 1);
+                        query = query.slice(0, query.length - 1);
                     } else {
                         break;
                     }
@@ -67,6 +101,6 @@ document.addEventListener("DOMContentLoaded", async () => {
                 break;
         }
 
-        $query.innerText = issue || "...";
+        $query.innerText = query || "...";
     });
 });
