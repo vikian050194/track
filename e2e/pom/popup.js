@@ -33,6 +33,10 @@ export class PopupPage extends BasePage {
         await this.press("Shift+Enter");
     }
 
+    async backspace() {
+        await this.press("Backspace");
+    }
+
     async up() {
         await this.press("ArrowUp");
     }
@@ -41,7 +45,11 @@ export class PopupPage extends BasePage {
         await this.press("ArrowDown");
     }
 
-    async backspace() {
-        await this.press("Backspace");
+    async right() {
+        await this.press("ArrowRight");
+    }
+
+    async left() {
+        await this.press("ArrowLeft");
     }
 }

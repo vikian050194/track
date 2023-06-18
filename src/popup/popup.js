@@ -3,9 +3,10 @@ import {
     Sync,
     Local,
     OPTIONS,
-    TARGETS
+    TARGETS,
+    buildUrl
 } from "../common/index.js";
-import { buildUrl } from "../common/url.js";
+import { getHierarchy } from "./hierarchy.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
     const isAutocloseEnabled = await Sync.get(OPTIONS.IS_AUTOCLOSE_ENABLED);
@@ -15,13 +16,16 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const allTargets = await Local.get(TARGETS.TARGETS);
     const activeTargets = allTargets.filter(t => t.isActive);
+    const layers = [];
+    const indexes = [];
+    let currentLayer = getHierarchy(activeTargets);
+
+    let currentOptionIndex = 0;
+    let maxOptionIndex = currentLayer.length - 1;
 
     const makeDiv = dom.makeElementCreator("div");
 
     const makeId = (id) => `opt-${id}`;
-
-    let currentOptionIndex = 0;
-    let maxOptionIndex = activeTargets.length - 1;
 
     let query = "";
 
@@ -36,9 +40,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         const elements = [];
 
         for (let index = 0; index <= maxOptionIndex; index++) {
-            const option = activeTargets[index];
+            const option = currentLayer[index];
             const isSelected = index == currentOptionIndex;
-            const title = `#${option.id}:${option.name}`;
+            const title = option.isLeaf ? `#${option.id}:${option.name}` : option.name;
             const className = isSelected ? "selected" : null;
             elements.push(makeDiv({ id: makeId(index), innerHTML: title, className }));
         }
@@ -61,6 +65,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
     document.addEventListener("keydown", async ({ key, shiftKey }) => {
+        resetAutoclose();
+
         switch (key) {
             case "Enter": {
                 const url = buildUrl(allTargets[currentOptionIndex].template, query);
@@ -76,19 +82,34 @@ document.addEventListener("DOMContentLoaded", async () => {
                 break;
             }
             case "ArrowUp":
-                resetAutoclose();
                 currentOptionIndex = currentOptionIndex > 0 ? currentOptionIndex - 1 : maxOptionIndex;
-                // currentOptionIndex -= currentOptionIndex > 0 ? 1 : 0;
                 render();
                 break;
             case "ArrowDown":
-                resetAutoclose();
                 currentOptionIndex = currentOptionIndex < maxOptionIndex ? currentOptionIndex + 1 : 0;
-                // currentOptionIndex += currentOptionIndex < maxOptionIndex ? 1 : 0;
+                render();
+                break;
+            case "ArrowRight":
+                if (currentLayer[currentOptionIndex].isLeaf) {
+                    break;
+                }
+                layers.push(currentLayer);
+                indexes.push(currentOptionIndex);
+                currentLayer = currentLayer[currentOptionIndex].nodes;
+                currentOptionIndex = 0;
+                maxOptionIndex = currentLayer.length - 1;
+                render();
+                break;
+            case "ArrowLeft":
+                if (layers.length < 1) {
+                    break;
+                }
+                currentLayer = layers.pop();
+                currentOptionIndex = indexes.pop();
+                maxOptionIndex = currentLayer.length - 1;
                 render();
                 break;
             default:
-                resetAutoclose();
                 if (key.length == 1) {
                     query += key;
                 } else {
