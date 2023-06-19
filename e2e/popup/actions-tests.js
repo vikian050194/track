@@ -53,4 +53,25 @@ test.describe("Actions", () => {
         // Assert
         await expect(newPage).toHaveURL("http://example.com/?issue=2023");
     });
+
+    test("Ignore attempt to execute directory", async ({ page, extensionId, context }) => {
+        // Arrange
+        const targets = new TargetsPage(page, extensionId);
+        await targets.goto();
+        await targets.create();
+        const firstRow = targets.getRowPom(1);
+        await firstRow.name.setValue("a/aa");
+        await targets.save();
+
+        const pom = new PopupPage(page, extensionId);
+        await pom.goto();
+        const updatedPage = await context.newPage();
+
+        // Act
+        await pom.search("2023");
+        await pom.enter();
+
+        // Assert
+        await expect(updatedPage).not.toHaveURL("http://example.com/?issue=2023");
+    });
 });

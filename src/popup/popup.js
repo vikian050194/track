@@ -69,7 +69,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         switch (key) {
             case "Enter": {
-                const url = buildUrl(allTargets[currentOptionIndex].template, query);
+                const node = currentLayer[currentOptionIndex];
+                if (node.isLeaf === false) {
+                    break;
+                }
+                const url = buildUrl(node.template, query);
                 if (shiftKey) {
                     await chrome.tabs.create({ url });
                 } else {
