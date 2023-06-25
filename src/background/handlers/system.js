@@ -3,25 +3,21 @@ import {
     Local,
     MENU,
     OPTIONS,
-    TARGETS
+    TARGETS,
+    DEFAULTS
 } from "../../common/index.js";
 
 const updateDefaultValues = async () => {
-    // autoclose
-    const isAutocloseEnabled = await Sync.get(OPTIONS.IS_AUTOCLOSE_ENABLED);
-    if (isAutocloseEnabled === undefined) {
-        await Sync.set(OPTIONS.IS_AUTOCLOSE_ENABLED, true);
-    }
-
-    const autocloseTime = await Sync.get(OPTIONS.AUTOCLOSE_TIME);
-    if (autocloseTime === undefined) {
-        await Sync.set(OPTIONS.AUTOCLOSE_TIME, 1);
-    }
-
-    // local data
     const targets = await Local.get(TARGETS.TARGETS);
     if (targets === undefined) {
         await Local.set(TARGETS.TARGETS, []);
+    }
+
+    for (const key in OPTIONS) {
+        const currentValue = await Sync.get(OPTIONS[key]);
+        if (currentValue === undefined) {
+            await Sync.set(OPTIONS[key], DEFAULTS[OPTIONS[key]]);
+        }
     }
 };
 

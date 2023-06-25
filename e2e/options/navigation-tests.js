@@ -13,7 +13,7 @@ test.describe("Navigation", () => {
 
     test("Header", async ({ page }) => {
         // Arrange
-        const header = page.locator("h1");
+        const header = page.locator("header > h1");
 
         // Assert
         await expect(header).toHaveText("Options");

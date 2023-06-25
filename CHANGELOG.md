@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.0] - 2023-06-25
+
+### Added
+
+- Full options description available in modal popup box
+
 ## [1.0.1] - 2023-06-19
 
 ### Fixed
@@ -75,7 +81,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Open new tab
 - Update current tab
 
-[Unreleased]: https://github.com/vikian050194/track/compare/v1.0.1...HEAD
+[Unreleased]: https://github.com/vikian050194/track/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/vikian050194/track/compare/v1.0.1...v1.1.0
 [1.0.1]: https://github.com/vikian050194/track/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/vikian050194/track/compare/v0.7.0...v1.0.0
 [0.7.0]: https://github.com/vikian050194/track/compare/v0.6.0...v0.7.0

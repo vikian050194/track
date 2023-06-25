@@ -16,10 +16,10 @@ test.describe("Sections", () => {
         const sections = page.locator("h2");
 
         // Assert
-        await expect(sections.nth(0)).toHaveText("Popup autoclose");
+        await expect(sections.nth(0)).toHaveText("Autoclose");
     });
 
-    test("Section: Popup autoclose", async ({ page }) => {
+    test("Section: Autoclose", async ({ page }) => {
         // Arrange
         const pom = new OptionsPage(page);
 
