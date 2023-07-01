@@ -2,11 +2,14 @@ import {
     dom,
     Sync,
     OPTIONS,
+    COLORS,
     AUTOCLOSE
 } from "../common/index.js";
 import { descriptions } from "./description.js";
+import { getTranslation } from "./translation.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
+    const $rootElement = document.documentElement;
     const $modal = document.getElementById("modal-one");
 
     const icon = "{ &#8505; }";
@@ -40,7 +43,47 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
     });
 
+    const color = await Sync.get(OPTIONS.UI_SELECTED_ITEM_COLOR);
+    $rootElement.style.setProperty("--new", color);
+
     const makeOption = dom.makeElementCreator("option");
+
+    // Pins and tabs
+    const pins = document.querySelectorAll("button.pin");
+    const tabs = document.querySelectorAll("div.tab");
+
+    const showTab = (showIndex) => {
+        for (let index = 0; index < tabs.length; index++) {
+            const tab = tabs[index];
+            const value = tab.getAttribute("tab-id") === showIndex ? "block" : "none";
+            tab.style.setProperty("display", value);
+        }
+
+        for (let index = 0; index < pins.length; index++) {
+            const pin = pins[index];
+            const value = pin.getAttribute("pin-id") === showIndex ? "underline" : "none";
+            pin.style.setProperty("text-decoration", value);
+        }
+    };
+
+    showTab("1");
+
+    for (let index = 0; index < pins.length; index++) {
+        const pin = pins[index];
+        pin.addEventListener("click", (e) => {
+            const showIndex = e.currentTarget.getAttribute("pin-id");
+            showTab(showIndex);
+        });
+    }
+
+    // Appearance
+    const $selectedItemColor = document.getElementById(OPTIONS.UI_SELECTED_ITEM_COLOR);
+    for (const value of COLORS.ORDERED) {
+        $selectedItemColor.append(
+            makeOption({ text: getTranslation(value), value }),
+        );
+    }
+    $selectedItemColor.value = await Sync.get(OPTIONS.UI_SELECTED_ITEM_COLOR);
 
     // Autoclose
     const $isAutocloseEnabled = document.getElementById(OPTIONS.IS_AUTOCLOSE_ENABLED);
@@ -57,7 +100,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Save
     const $saveButton = document.getElementById("save");
     $saveButton.addEventListener("click", async () => {
-        // Autoclose
+        await Sync.set(OPTIONS.UI_SELECTED_ITEM_COLOR, $selectedItemColor.value);
+
         await Sync.set(OPTIONS.IS_AUTOCLOSE_ENABLED, $isAutocloseEnabled.checked);
         await Sync.set(OPTIONS.AUTOCLOSE_TIME, $autocloseTimeSec.value);
     });

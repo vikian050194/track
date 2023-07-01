@@ -18,6 +18,15 @@ const makeDescription = (key, title, paragraphs) => new Description(key, title, 
 
 export const descriptions = [
     makeDescription(
+        OPTIONS.UI_SELECTED_ITEM_COLOR,
+        "Selected item color",
+        [
+            "Color of selected item.",
+            "It's also used in different places on options page."
+        ]
+    ),
+
+    makeDescription(
         OPTIONS.IS_AUTOCLOSE_ENABLED,
         "Autoclose enabled",
         [

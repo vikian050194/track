@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.0] - 2023-07-01
+
+### Added
+
+- Selected item color
+
+### Changed
+
+- Popup query has not placeholder but has blinking cursor
+
 ## [1.1.0] - 2023-06-25
 
 ### Added
@@ -81,7 +91,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Open new tab
 - Update current tab
 
-[Unreleased]: https://github.com/vikian050194/track/compare/v1.1.0...HEAD
+[Unreleased]: https://github.com/vikian050194/track/compare/v1.2.0...HEAD
+[1.2.0]: https://github.com/vikian050194/track/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/vikian050194/track/compare/v1.0.1...v1.1.0
 [1.0.1]: https://github.com/vikian050194/track/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/vikian050194/track/compare/v0.7.0...v1.0.0

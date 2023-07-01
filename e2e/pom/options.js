@@ -43,6 +43,17 @@ class SelectOption extends BasePOM {
     }
 }
 
+export class UiOptions extends BasePOM {
+    /**
+     * @param {import('@playwright/test').Page} page
+     */
+    constructor(page) {
+        super(page);
+
+        this.selectedItemColor = new SelectOption(page, OPTIONS.UI_SELECTED_ITEM_COLOR);
+    }
+}
+
 class AutocloseOptions extends BasePOM {
     /**
      * @param {import('@playwright/test').Page} page
@@ -103,9 +114,12 @@ export class OptionsPage extends BasePage {
     constructor(page, extensionId) {
         super(page, extensionId);
 
+        this.ui = new UiOptions(page);
         this.autoclose = new AutocloseOptions(page);
 
         this.saveButton = page.locator("#save");
+        this.pins = page.locator("div.pins");
+        this.tabs = page.locator("div.tabs");
 
         this.modal = new ModalPopup(page);
     }
@@ -116,5 +130,13 @@ export class OptionsPage extends BasePage {
 
     async save() {
         await this.saveButton.click();
+    }
+
+    getPin(index) {
+        return this.pins.locator(`button[pin-id="${index}"]`);
+    }
+
+    getTab(index) {
+        return this.tabs.locator(`div[tab-id="${index}"]`);
     }
 }

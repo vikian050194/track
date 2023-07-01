@@ -2,8 +2,27 @@ body {
     width: 320px;
 }
 
+#query::after {
+    content: "|";
+    font-weight: bold;
+    color: var(--selected-item-color);
+    animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+
+    from,
+    to {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
 .selected {
-    color: red;
+    color: var(--selected-item-color);
     font-weight: bold;
 }
 

@@ -11,24 +11,35 @@ import { getHierarchy } from "./hierarchy.js";
 document.addEventListener("DOMContentLoaded", async () => {
     const isAutocloseEnabled = await Sync.get(OPTIONS.IS_AUTOCLOSE_ENABLED);
     const autocloseTimeSec = await Sync.get(OPTIONS.AUTOCLOSE_TIME);
+
+    const color = await Sync.get(OPTIONS.UI_SELECTED_ITEM_COLOR);
+
+    // Autoclose
     let autocloseId = null;
     const resetAutoclose = () => clearTimeout(autocloseId);
 
+    // Input and output
+    let query = "";
     const allTargets = await Local.get(TARGETS.TARGETS);
     const activeTargets = allTargets.filter(t => t.isActive);
     const layers = [];
     const indexes = [];
     let currentLayer = getHierarchy(activeTargets);
 
+    // UI items
+    const queryPlaceholder = "";
+
+    // Indexes
     let currentOptionIndex = 0;
     let maxOptionIndex = currentLayer.length - 1;
 
+    // UI builders
     const makeDiv = dom.makeElementCreator("div");
 
     const makeId = (id) => `opt-${id}`;
 
-    let query = "";
-
+    // DOM elements creating and updating
+    const $rootElement = document.documentElement;
     const $root = document.getElementById("root");
 
     const $query = makeDiv({ id: "query" });
@@ -36,6 +47,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     $root.append($query, document.createElement("hr"), $options);
 
+    $rootElement.style.setProperty("--selected-item-color", color);
+
+    // Render
     const render = () => {
         const elements = [];
 
@@ -52,16 +66,16 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
 
         $options.append(...elements);
-    };
 
-    $query.innerText = "...";
+        $query.innerText = query || queryPlaceholder;
+    };
 
     render();
 
     document.addEventListener("paste", e => {
         const data = e.clipboardData.getData("text/plain");
         query = data;
-        $query.innerText = query || "...";
+        $query.innerText = query || queryPlaceholder;
     });
 
     document.addEventListener("keydown", async ({ key, shiftKey }) => {
@@ -123,9 +137,8 @@ document.addEventListener("DOMContentLoaded", async () => {
                         break;
                     }
                 }
+                render();
                 break;
         }
-
-        $query.innerText = query || "...";
     });
 });

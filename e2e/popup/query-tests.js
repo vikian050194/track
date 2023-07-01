@@ -18,7 +18,7 @@ test.describe("Query", () => {
         const pom = new PopupPage(page, extensionId);
 
         // Assert
-        await expect(pom.query).toHaveText("...");
+        await expect(pom.query).toHaveText("");
     });
 
     test("One word", async ({ page, extensionId }) => {
@@ -43,7 +43,7 @@ test.describe("Query", () => {
         }
 
         // Assert
-        await expect(pom.query).toHaveText("...");
+        await expect(pom.query).toHaveText("");
     });
 
     test("Paste", async ({ page, extensionId }) => {

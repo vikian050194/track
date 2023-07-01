@@ -13,28 +13,56 @@
             <h1>Options</h1>
         </header>
         <main>
-            <h2>Autoclose</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Value</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><span class="title" data-info-id="is-autoclose-enabled"></span></td>
-                        <td><input id="is-autoclose-enabled" type="checkbox"></td>
-                        <td><span class="info" data-info-id="is-autoclose-enabled"></span></td>
-                    </tr>
-                    <tr>
-                        <td><span class="title" data-info-id="autoclose-time"></span></td>
-                        <td><select id="autoclose-time"></select></td>
-                        <td><span class="info" data-info-id="autoclose-time"></span></td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="pins">
+                <button class="pin" pin-id="1">Appearance</button>
+                <button class="pin" pin-id="2">Autoclose</button>
+            </div>
+            <div class="tabs">
+                <div class="tab" tab-id="1">
+                    <h2>Appearance</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Value</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="title" data-info-id="ui-selected-item-color"></span><span class="new"></span></td>
+                                <td><select id="ui-selected-item-color"></select></td>
+                                <td><span class="info" data-info-id="ui-selected-item-color"></span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tab" tab-id="2">
+                    <h2>Autoclose</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Value</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="title" data-info-id="is-autoclose-enabled"></span></td>
+                                <td><input id="is-autoclose-enabled" type="checkbox"></td>
+                                <td><span class="info" data-info-id="is-autoclose-enabled"></span></td>
+                            </tr>
+                            <tr>
+                                <td><span class="title" data-info-id="autoclose-time"></span></td>
+                                <td><select id="autoclose-time"></select></td>
+                                <td><span class="info" data-info-id="autoclose-time"></span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
             <button id="save" class="action">Save</button>
         </main>
         <footer>
