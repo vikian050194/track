@@ -100,8 +100,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Save
     const $saveButton = document.getElementById("save");
     $saveButton.addEventListener("click", async () => {
+        // Appearance
         await Sync.set(OPTIONS.UI_SELECTED_ITEM_COLOR, $selectedItemColor.value);
 
+        // Autoclose
         await Sync.set(OPTIONS.IS_AUTOCLOSE_ENABLED, $isAutocloseEnabled.checked);
         await Sync.set(OPTIONS.AUTOCLOSE_TIME, $autocloseTimeSec.value);
     });
