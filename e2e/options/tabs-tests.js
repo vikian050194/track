@@ -14,19 +14,21 @@ test.describe("Tabs", () => {
     test("Pins", async ({ page }) => {
         // Arrange
         const pom = new OptionsPage(page);
+        let index = 1;
 
         // Assert
-        await expect(pom.getPin(1)).toHaveText("Appearance");
-        await expect(pom.getPin(2)).toHaveText("Autoclose");
+        await expect(pom.getPin(index++)).toHaveText("Appearance");
+        await expect(pom.getPin(index++)).toHaveText("Autoclose");
     });
 
     test("Tabs", async ({ page }) => {
         // Arrange
         const pom = new OptionsPage(page);
+        let index = 1;
 
         // Assert
-        await expect(pom.getTab(1).locator("h2")).toHaveText("Appearance");
-        await expect(pom.getTab(2).locator("h2")).toHaveText("Autoclose");
+        await expect(pom.getTab(index++).locator("h2")).toHaveText("Appearance");
+        await expect(pom.getTab(index++).locator("h2")).toHaveText("Autoclose");
 
         for (let i = 1; i <= COUNT; i++) {
             if (i === 1) {
