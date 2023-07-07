@@ -13,6 +13,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     const autocloseTimeSec = await Sync.get(OPTIONS.AUTOCLOSE_TIME);
 
     const color = await Sync.get(OPTIONS.UI_SELECTED_ITEM_COLOR);
+    const weight = await Sync.get(OPTIONS.UI_SELECTED_ITEM_FONT_WEIGHT);
+    const fontSize = await Sync.get(OPTIONS.UI_FONT_SIZE);
 
     // Autoclose
     let autocloseId = null;
@@ -48,6 +50,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     $root.append($query, document.createElement("hr"), $options);
 
     $rootElement.style.setProperty("--selected-item-color", color);
+    $rootElement.style.setProperty("--selected-item-font-weight", weight);
+    $rootElement.style.setProperty("--font-size", `${fontSize}px`);
 
     // Render
     const render = () => {

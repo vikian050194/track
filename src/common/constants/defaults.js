@@ -1,10 +1,14 @@
 import * as OPTIONS from "./options.js";
 import { T1 } from "./autoclose.js";
 import { RED } from "./colors.js";
+import { P12 } from "./fonts.js";
+import { BOLD } from "./weight.js";
 
 export const DEFAULTS = {
     [OPTIONS.IS_AUTOCLOSE_ENABLED]: true,
     [OPTIONS.AUTOCLOSE_TIME]: T1,
 
-    [OPTIONS.UI_SELECTED_ITEM_COLOR]: RED
+    [OPTIONS.UI_SELECTED_ITEM_COLOR]: RED,
+    [OPTIONS.UI_SELECTED_ITEM_FONT_WEIGHT]: BOLD,
+    [OPTIONS.UI_FONT_SIZE]: P12
 };
