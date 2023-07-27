@@ -1,13 +1,20 @@
 import { test, expect, timeout } from "../fixtures.js";
 import {
     PopupPage,
-    TargetsPage
+    TargetsPage,
+    OptionsPage
 } from "../pom/index.js";
 
 test.describe("Items", () => {
     test.beforeEach(async ({ page, extensionId, context }) => {
         await page.waitForTimeout(timeout);
 
+        const options = new OptionsPage(page, extensionId);
+        await options.goto();
+
+        await options.ui.selectedItemArrow.click();
+        await options.save();
+        
         const pom = new PopupPage(page, extensionId);
         await pom.goto();
 
@@ -28,6 +35,22 @@ test.describe("Items", () => {
 
         const pom = new PopupPage(page, extensionId);
         await pom.goto();
+    });
+
+    test("Arrow is visible", async ({ page, extensionId }) => {
+        // Arrange
+        const options = new OptionsPage(page, extensionId);
+        await options.goto();
+
+        await options.ui.selectedItemArrow.click();
+        await options.save();
+
+        const pom = new PopupPage(page, extensionId);
+        await pom.goto();
+
+        // Assert
+        await expect(pom.selected).toHaveText("➤#1:target#1");
+        await expect(pom.nth(0)).toHaveText("➤#1:target#1");
     });
 
     test("No items", async ({ page, extensionId }) => {

@@ -1,12 +1,19 @@
 import { test, expect, timeout } from "../fixtures.js";
 import {
     PopupPage,
-    TargetsPage
+    TargetsPage,
+    OptionsPage
 } from "../pom/index.js";
 
 test.describe("Hierarchy", () => {
     test.beforeEach(async ({ page, extensionId, context }) => {
         await page.waitForTimeout(timeout);
+
+        const options = new OptionsPage(page, extensionId);
+        await options.goto();
+
+        await options.ui.selectedItemArrow.click();
+        await options.save();
 
         const pom = new PopupPage(page, extensionId);
         await pom.goto();

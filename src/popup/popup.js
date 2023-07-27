@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const color = await Sync.get(OPTIONS.UI_SELECTED_ITEM_COLOR);
     const weight = await Sync.get(OPTIONS.UI_SELECTED_ITEM_FONT_WEIGHT);
     const fontSize = await Sync.get(OPTIONS.UI_FONT_SIZE);
+    const isArrow = await Sync.get(OPTIONS.UI_SELECTED_ITEM_ARROW);
 
     // Autoclose
     let autocloseId = null;
@@ -29,6 +30,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     let currentLayer = getHierarchy(activeTargets);
 
     // UI items
+    const arrowChar = "&#10148;";
+    const visibleArrow = isArrow ? `<span>${arrowChar}</span>` : "";
+    const invisibleArrow = isArrow ? `<span style="color:white;">${arrowChar}</span>` : "";
     const queryPlaceholder = "";
 
     // Indexes
@@ -60,9 +64,13 @@ document.addEventListener("DOMContentLoaded", async () => {
         for (let index = 0; index <= maxOptionIndex; index++) {
             const option = currentLayer[index];
             const isSelected = index == currentOptionIndex;
-            const title = option.isLeaf ? `#${option.id}:${option.name}` : option.name;
-            const className = isSelected ? "selected" : null;
-            elements.push(makeDiv({ id: makeId(index), innerHTML: title, className }));
+            const titlePrefix = isSelected ? visibleArrow : invisibleArrow;
+            const title = titlePrefix + (option.isLeaf ? `#${option.id}:${option.name}` : option.name);
+            const classList = ["option"];
+            if (isSelected) {
+                classList.push("selected");
+            }
+            elements.push(makeDiv({ id: makeId(index), innerHTML: title, classList }));
         }
 
         while ($options.firstChild) {

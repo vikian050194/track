@@ -103,6 +103,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
     $selectedItemFontWeight.value = await Sync.get(OPTIONS.UI_SELECTED_ITEM_FONT_WEIGHT);
 
+    const $selectedItemArrow = document.getElementById(OPTIONS.UI_SELECTED_ITEM_ARROW);
+    $selectedItemArrow.checked = await Sync.get(OPTIONS.UI_SELECTED_ITEM_ARROW);
+
     // Autoclose
     const $isAutocloseEnabled = document.getElementById(OPTIONS.IS_AUTOCLOSE_ENABLED);
     $isAutocloseEnabled.checked = await Sync.get(OPTIONS.IS_AUTOCLOSE_ENABLED);
@@ -122,6 +125,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         await Sync.set(OPTIONS.UI_FONT_SIZE, $fontSize.value);
         await Sync.set(OPTIONS.UI_SELECTED_ITEM_COLOR, $selectedItemColor.value);
         await Sync.set(OPTIONS.UI_SELECTED_ITEM_FONT_WEIGHT, $selectedItemFontWeight.value);
+        await Sync.set(OPTIONS.UI_SELECTED_ITEM_ARROW, $selectedItemArrow.checked);
 
         // Autoclose
         await Sync.set(OPTIONS.IS_AUTOCLOSE_ENABLED, $isAutocloseEnabled.checked);
