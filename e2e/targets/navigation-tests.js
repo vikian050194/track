@@ -2,8 +2,12 @@ import { test, expect, timeout } from "../fixtures.js";
 import { TargetsPage } from "../pom/index.js";
 
 test.describe("Navigation", () => {
-    test.beforeEach(async ({ page, extensionId }) => {
+    test.beforeEach(async ({ page, context, extensionId }) => {
         await page.waitForTimeout(timeout * 2);
+
+        // TODO handle changelog automatic opening somehow else
+        await context.pages()[0].close();
+        await context.pages()[1].close();
 
         const pom = new TargetsPage(page, extensionId);
         await pom.goto();

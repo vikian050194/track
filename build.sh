@@ -17,9 +17,12 @@ fi
 
 set -e
 
+source venv/bin/activate
+python mdConverter.py
+
 npm run lint
 npm run test
 npm run test:ui
 
-rm "track-$MANIFEST_VERSION.zip"
+rm "track-$MANIFEST_VERSION.zip" --force
 zip -r "track-$MANIFEST_VERSION.zip" src

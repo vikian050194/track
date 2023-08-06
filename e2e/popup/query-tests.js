@@ -7,10 +7,12 @@ test.describe("Query", () => {
     test.beforeEach(async ({ page, extensionId, context }) => {
         await page.waitForTimeout(timeout);
 
+        // TODO handle changelog automatic opening somehow else
+        await context.pages()[0].close();
+        await context.pages()[1].close();
+
         const pom = new PopupPage(page, extensionId);
         await pom.goto();
-
-        await context.pages()[0].close();
     });
 
     test("Empty", async ({ page, extensionId }) => {

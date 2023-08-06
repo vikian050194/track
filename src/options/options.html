@@ -16,6 +16,7 @@
             <div class="pins">
                 <button class="pin" pin-id="1">Appearance</button>
                 <button class="pin" pin-id="2">Autoclose</button>
+                <button class="pin" pin-id="3">Changelog</button>
             </div>
             <div class="tabs">
                 <div class="tab" tab-id="1">
@@ -45,7 +46,7 @@
                                 <td><span class="info" data-info-id="ui-selected-item-font-weight"></span></td>
                             </tr>
                             <tr>
-                                <td><span class="title" data-info-id="ui-selected-item-arrow"></span><span class="new"></span></td>
+                                <td><span class="title" data-info-id="ui-selected-item-arrow"></span></td>
                                 <td><input id="ui-selected-item-arrow" type="checkbox"></td>
                                 <td><span class="info" data-info-id="ui-selected-item-arrow"></span></td>
                             </tr>
@@ -76,7 +77,25 @@
                         </tbody>
                     </table>
                 </div>
-
+                <div class="tab" tab-id="3">
+                    <h2>Changelog</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Value</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="title" data-info-id="changelog-show"></span><span class="new"></span></td>
+                                <td><input id="changelog-show" type="checkbox"></td>
+                                <td><span class="info" data-info-id="changelog-show"></span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
             <button id="save" class="action">Save</button>
         </main>
@@ -87,6 +106,10 @@
             <span>|</span>
             <span>
                 <a href="/targets/targets.html">targets</a>
+            </span>
+            <span>|</span>
+            <span>
+                <a href="/changelog/changelog.html">changelog</a>
             </span>
         </footer>
     </div>

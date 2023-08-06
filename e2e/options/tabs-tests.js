@@ -2,14 +2,18 @@ import { test, expect, timeout } from "../fixtures.js";
 import { OptionsPage } from "../pom/index.js";
 
 test.describe("Tabs", () => {
-    test.beforeEach(async ({ page, extensionId }) => {
+    test.beforeEach(async ({ page, extensionId, context }) => {
         await page.waitForTimeout(timeout * 2);
+
+        // TODO handle changelog automatic opening somehow else
+        await context.pages()[0].close();
+        await context.pages()[1].close();
 
         const pom = new OptionsPage(page, extensionId);
         await pom.goto();
     });
 
-    const COUNT = 2;
+    const COUNT = 3;
 
     test("Pins", async ({ page }) => {
         // Arrange
@@ -19,6 +23,7 @@ test.describe("Tabs", () => {
         // Assert
         await expect(pom.getPin(index++)).toHaveText("Appearance");
         await expect(pom.getPin(index++)).toHaveText("Autoclose");
+        await expect(pom.getPin(index++)).toHaveText("Changelog");
     });
 
     test("Tabs", async ({ page }) => {
@@ -29,6 +34,7 @@ test.describe("Tabs", () => {
         // Assert
         await expect(pom.getTab(index++).locator("h2")).toHaveText("Appearance");
         await expect(pom.getTab(index++).locator("h2")).toHaveText("Autoclose");
+        await expect(pom.getTab(index++).locator("h2")).toHaveText("Changelog");
 
         for (let i = 1; i <= COUNT; i++) {
             if (i === 1) {

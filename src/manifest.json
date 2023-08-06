@@ -2,7 +2,7 @@
     "manifest_version": 3,
     "name": "track",
     "description": "Open dynamically combined URL without a single mouse click",
-    "version": "1.4.0",
+    "version": "1.5.0",
     "permissions": [
         "storage",
         "contextMenus"
@@ -35,5 +35,5 @@
         "32": "icons/icon_32.png",
         "128": "icons/icon_128.png"
     },
-    "homepage_url": "https://github.com/vikian050194/track"
+    "homepage_url": "https://track.vikian050194.dev"
 }

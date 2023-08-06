@@ -19,7 +19,7 @@ It's my second Chrome extension. And it would not be nice to mix responsibilitie
 
 ## Requirements
 
-Developed and tested on `Version 100.0.4896.75 (Official Build) (64-bit)` and newer.
+Developed and tested on `Version 115.0.5790.170 (Official Build) (64-bit)`
 
 ## Installation
 
@@ -29,23 +29,39 @@ Just go [here][store-version-url] and click "Add to Chrome"
 
 **From sources**
 
-1. Clone repo
-2. Open Chrome and navigate [here](chrome://extensions/)
-3. Enable `Developer mode` via toggle
-4. `Load unpacked` and select `src` directory of the cloned repo
-5. Reboot Chrome - probably is not required step
+1. Clone repo `git clone https://github.com/vikian050194/track.git`
+2. Create and activate Python virtual environment
+3. Install dependencies `pip install -r requirements.txt` and run `python mdConverter.py`
+4. Open Chrome and navigate [here](chrome://extensions/)
+5. Enable `Developer mode` via toggle
+6. `Load unpacked` and select `src` directory of the cloned repo
 
 ## Usage
 
-1. Activate extension
-2. Type issue number
-3. Press `Enter` to override current tab or `Shift+Enter` to open new tab
+1. Install extension;
+2. Go to extensions shortcuts page (chrome://extensions/shortcuts) and re-configure keys combination for activation (if needed);
+3. Go to extension options and update it if needed;
+4. Go to targets page and add required targets;
+5. Activate extension (`Alt+T` by default);
+6. Type value for placeholder;
+7. Update active tab by pressing `Enter` or open new tab by `Shift+Enter`.
 
 ### Configuration
 
 Extension has few options.
 
 You can [setup your own shortcut for activation](chrome://extensions/shortcuts), but default one is `Alt+T` or `Command+T`.
+
+**Appearance**
+
+| Name | Description |
+| :--- | :--- |
+| Font size | Popup font size in pixels |
+| Selected item color | Color of selected item in results list |
+| Selected item font weight | Font weight of selected item in results list |
+| Arrow pointer | Arrow appears in front of selected item |
+
+**Autoclosing**
 
 | Name | Description |
 | :--- | :--- |

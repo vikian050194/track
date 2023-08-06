@@ -5,10 +5,12 @@ test.describe("Sections", () => {
     test.beforeEach(async ({ page, extensionId, context }) => {
         await page.waitForTimeout(timeout);
 
+        // TODO handle changelog automatic opening somehow else
+        await context.pages()[0].close();
+        await context.pages()[1].close();
+
         const pom = new OptionsPage(page, extensionId);
         await pom.goto();
-
-        await context.pages()[0].close();
     });
 
     test("Appearance", async ({ page }) => {
@@ -55,5 +57,23 @@ test.describe("Sections", () => {
         // Assert
         await pom.autoclose.enabled.isChecked(false);
         await pom.autoclose.time.hasValue("2");
+    });
+
+    test("Changelog", async ({ page }) => {
+        // Arrange
+        const pom = new OptionsPage(page);
+
+        await pom.getPin(3).click();
+
+        await pom.changelog.show.isChecked(true);
+
+        // Act
+        await pom.changelog.show.click();
+
+        await pom.save();
+        await pom.reload();
+
+        // Assert
+        await pom.changelog.show.isChecked(false);
     });
 });
