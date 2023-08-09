@@ -15,7 +15,12 @@
 
 ## Motivation
 
-It's my second Chrome extension. And it would not be nice to mix responsibilities and add such functionality into [warp][warp-url].
+There are three general cases when it's necessary to open combined URL:
+1. Localhost with project specific port;
+2. Issue in task tracker;
+3. Source file in repository web view.
+
+According to my experience second is most frequent, but last one is most annoying. First case is rare, but it's covered out-of-box.
 
 ## Requirements
 
@@ -70,12 +75,16 @@ You can [setup your own shortcut for activation](chrome://extensions/shortcuts),
 
 ## Tests
 
-`mocha` is used for unit testing and `c8` for coverage
-`playwright` is used for e2e testing
+### Packages
 
-`npm test` - run unit tests
-`npm run cover` - run code coverage
-`npm run test:ui` - run e2e tests
+- `mocha` is used for unit testing and `c8` for coverage
+- `playwright` is used for e2e testing
+
+### How to run
+
+- `npm test` - run unit tests
+- `npm run cover` - run code coverage
+- `npm run test:ui` - run e2e tests
 
 [warp-url]: https://github.com/vikian050194/warp
 
