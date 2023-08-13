@@ -73,6 +73,12 @@ You can [setup your own shortcut for activation](chrome://extensions/shortcuts),
 | Autoclose enabled | Is popup autoclose enabled |
 | Autoclose time | Popup autoclose time in seconds |
 
+**Changelog**
+
+| Name | Description |
+| :--- | :--- |
+| Show on update | If enabled then changelog page will be shown automatically on extension version update |
+
 ## Tests
 
 ### Packages

@@ -25,4 +25,4 @@ npm run test
 npm run test:ui
 
 rm "track-$MANIFEST_VERSION.zip" --force
-zip -r "track-$MANIFEST_VERSION.zip" src
+zip -r "track-$MANIFEST_VERSION.zip" src -x src/changelog/template.html 

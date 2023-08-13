@@ -42,4 +42,15 @@ test.describe("Navigation", () => {
         // Assert
         await expect(page).toHaveURL(new RegExp("targets/targets.html"));
     });
+
+    test("Changelog", async ({ page }) => {
+        // Arrange
+        const link = page.locator("footer > span", { hasText: "changelog" });
+
+        // Act
+        await link.click();
+
+        // Assert
+        await expect(page).toHaveURL(new RegExp("changelog/changelog.html"));
+    });
 });
