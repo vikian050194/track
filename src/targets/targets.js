@@ -2,7 +2,8 @@ import {
     Local,
     Target,
     TARGETS,
-    dom
+    dom,
+    getVersion
 } from "../common/index.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -46,4 +47,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         await Local.set(TARGETS.TARGETS, []);
         location.reload();
     });
+
+    // Version
+    document.getElementById("version").innerText = getVersion();
 });
