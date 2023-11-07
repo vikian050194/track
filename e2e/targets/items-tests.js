@@ -104,4 +104,16 @@ test.describe("Items", () => {
         // Assert
         await pom.empty();
     });
+
+    test("Reset", async ({ page }) => {
+        // Arrange
+        const pom = new TargetsPage(page);
+
+        // Act
+        await pom.create();
+        await pom.reset();
+
+        // Assert
+        await pom.empty();
+    });
 });

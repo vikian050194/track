@@ -97,6 +97,8 @@ export class TargetsPage extends BasePage {
         this.saveButton = page.locator("#save");
         this.createButton = page.locator("#create");
         this.resetButton = page.locator("#reset");
+        this.fileSaveButton = page.locator("#file-save");
+        this.fileLoadButton = page.locator("#file-load");
     }
 
     async goto() {
