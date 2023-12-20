@@ -2,6 +2,7 @@ import {
     Sync,
     Local,
     MENU,
+    COUNTERS,
     OPTIONS,
     TARGETS,
     DEFAULTS
@@ -11,6 +12,13 @@ const updateDefaultValues = async () => {
     const targets = await Local.get(TARGETS.TARGETS);
     if (targets === undefined) {
         await Local.set(TARGETS.TARGETS, []);
+    }
+
+    const since = await Local.get(COUNTERS.SINCE);
+    if (since === undefined) {
+        await Local.set(COUNTERS.SINCE, new Date().toISOString());
+        await Local.set(COUNTERS.OPEN_UPDATE, 0);
+        await Local.set(COUNTERS.OPEN_CREATE, 0);
     }
 
     for (const key in OPTIONS) {
@@ -25,6 +33,14 @@ const updateMenu = async () => {
     await chrome.contextMenus.create({
         id: MENU.TARGETS,
         title: "Targets",
+        contexts: ["action"],
+        type: "normal",
+        enabled: true
+    });
+
+    await chrome.contextMenus.create({
+        id: MENU.COUNTERS,
+        title: "Counters",
         contexts: ["action"],
         type: "normal",
         enabled: true

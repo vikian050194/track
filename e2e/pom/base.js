@@ -9,10 +9,6 @@ export class BasePOM {
 
         this.expect = expect;
     }
-
-    async goto(name) {
-        await this.page.goto(`chrome-extension://${this.extensionId}/${name}/${name}.html`);
-    }
 }
 
 class Navigation extends BasePOM {
@@ -26,6 +22,7 @@ class Navigation extends BasePOM {
 
         this.options = container.locator("span", { hasText: "options" });
         this.targets = container.locator("span", { hasText: "targets" });
+        this.counters = container.locator("span", { hasText: "counters" });
         this.changelog = container.locator("span", { hasText: "changelog" });
     }
 }

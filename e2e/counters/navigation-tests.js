@@ -1,29 +1,31 @@
 import { test, expect, timeout } from "../fixtures.js";
-import { OptionsPage } from "../pom/index.js";
+import {
+    CountersPage
+} from "../pom/index.js";
 
 test.describe("Navigation", () => {
     test.beforeEach(async ({ page, extensionId, context }) => {
-        await page.waitForTimeout(timeout);
+        await page.waitForTimeout(timeout * 2);
 
         // TODO handle changelog automatic opening somehow else
         await context.pages()[0].close();
         await context.pages()[1].close();
 
-        const pom = new OptionsPage(page, extensionId);
+        const pom = new CountersPage(page, extensionId);
         await pom.goto();
     });
 
     test("Header", async ({ page }) => {
         // Arrange
-        const header = page.locator("header > h1");
+        const header = page.locator("h1");
 
         // Assert
-        await expect(header).toHaveText("Options");
+        await expect(header).toHaveText("Counters");
     });
 
     test("Options", async ({ page }) => {
         // Arrange
-        const pom = new OptionsPage(page);
+        const pom = new CountersPage(page);
 
         // Act
         await pom.navigation.options.click();
@@ -34,7 +36,7 @@ test.describe("Navigation", () => {
 
     test("Targets", async ({ page }) => {
         // Arrange
-        const pom = new OptionsPage(page);
+        const pom = new CountersPage(page);
 
         // Act
         await pom.navigation.targets.click();
@@ -45,7 +47,7 @@ test.describe("Navigation", () => {
 
     test("Counters", async ({ page }) => {
         // Arrange
-        const pom = new OptionsPage(page);
+        const pom = new CountersPage(page);
 
         // Act
         await pom.navigation.counters.click();
@@ -56,7 +58,7 @@ test.describe("Navigation", () => {
 
     test("Changelog", async ({ page }) => {
         // Arrange
-        const pom = new OptionsPage(page);
+        const pom = new CountersPage(page);
 
         // Act
         await pom.navigation.changelog.click();
@@ -67,7 +69,7 @@ test.describe("Navigation", () => {
 
     test("Version", async ({ page }) => {
         // Arrange
-        const pom = new OptionsPage(page);
+        const pom = new CountersPage(page);
 
         // Assert
         await pom.checkVersion();

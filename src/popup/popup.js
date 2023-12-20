@@ -3,6 +3,7 @@ import {
     Sync,
     Local,
     OPTIONS,
+    COUNTERS,
     TARGETS,
     buildUrl
 } from "../common/index.js";
@@ -101,8 +102,12 @@ document.addEventListener("DOMContentLoaded", async () => {
                 }
                 const url = buildUrl(node.template, query);
                 if (shiftKey) {
+                    const create = await Local.get(COUNTERS.OPEN_CREATE);
+                    await Local.set(COUNTERS.OPEN_CREATE, create + 1);
                     await chrome.tabs.create({ url });
                 } else {
+                    const update = await Local.get(COUNTERS.OPEN_UPDATE);
+                    await Local.set(COUNTERS.OPEN_UPDATE, update + 1);
                     const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
                     await chrome.tabs.update(tab.id, { url });
                 }

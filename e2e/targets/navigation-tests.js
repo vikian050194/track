@@ -44,6 +44,17 @@ test.describe("Navigation", () => {
         await expect(page).toHaveURL(new RegExp("targets/targets.html"));
     });
 
+    test("Counters", async ({ page }) => {
+        // Arrange
+        const pom = new TargetsPage(page);
+
+        // Act
+        await pom.navigation.counters.click();
+
+        // Assert
+        await expect(page).toHaveURL(new RegExp("counters/counters.html"));
+    });
+
     test("Changelog", async ({ page }) => {
         // Arrange
         const pom = new TargetsPage(page);

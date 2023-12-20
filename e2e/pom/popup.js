@@ -18,7 +18,7 @@ export class PopupPage extends BasePage {
     }
 
     async search(query) {
-        await this.page.type("body", query);
+        await this.page.locator("body").pressSequentially(query);
     }
 
     async press(button) {
@@ -31,6 +31,10 @@ export class PopupPage extends BasePage {
 
     async shiftEnter() {
         await this.press("Shift+Enter");
+    }
+
+    async controlShiftEnter() {
+        await this.press("Shift+Control+Enter");
     }
 
     async backspace() {
