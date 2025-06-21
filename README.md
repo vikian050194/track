@@ -13,6 +13,8 @@
 
 **track** is Google Chrome extension for opening task tracker issue without clicking, just recall and type issue number!
 
+By the way, there is [todo list](./TODO.md).
+
 ## Motivation
 
 There are three general cases when it's necessary to open combined URL:
